@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+ESTADO_CHOICES = [
+    ('RS', 'Rescatado'),
+    ('DS', 'Disponible'),
+    ('AD', 'Adoptado'),
+]
+
 REGION_CHOICES = [
     ('', 'Seleccionar'),
     ('RM', 'Region Metropolitana'),
@@ -67,7 +73,7 @@ VIVIENDA_CHOICES = [
     ('DTO', 'Departamento'),
 ]
 
-class UserProfile(models.Model):
+class Profile(models.Model):
     usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     tipo = models.CharField(max_length=10, default='voluntario')
     rut = models.CharField(max_length=12, default='12345678-9')
@@ -91,3 +97,20 @@ class UserProfile(models.Model):
     
     def __str__(self):
         return self.usuario.username
+
+#class Rescatado(models.Model):
+#    autor = models.OneToOneField(User, on_delete=models.CASCADE)
+#    imagen = models.ImageField(upload_to=settings.IMAGE_UPLOAD , default='/static/None/no-img.jpg')
+#    nombre = models.CharField(max_length=50)
+#    raza = models.CharField(max_length=50)
+#    descripcion = models.CharField(max_length=200)
+#    estado = models.CharField(
+#        max_length=50,
+#        choices=ESTADO_CHOICES,
+#    )
+#
+#    def __autor__(self):
+#        return self.autor.username
+#
+#    def __str__(self):
+#        return self.nombre

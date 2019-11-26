@@ -1,8 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 
-from .forms import UserProfileForm, ExtendedUserCreationForm
+from .forms import ProfileForm, ExtendedUserCreationForm
 
 # Create your views here.
 # def registro_mascota(request):
@@ -17,14 +16,13 @@ def home(request):
 def register(request):
     if request.method == 'POST':
         form = ExtendedUserCreationForm(request.POST)
-        profile_form = UserProfileForm(request.POST or None)
+        profile_form = ProfileForm(request.POST or None)
 
         if profile_form.is_valid() and form.is_valid():
-        #if form.is_valid():
             user = form.save()
 
             profile = profile_form.save(commit=False)
-            profile.user = user
+            profile.usuario = user
 
             profile.save()
 
@@ -36,10 +34,10 @@ def register(request):
             return redirect('home')
     else:
         form = ExtendedUserCreationForm()
-        profile_form = UserProfileForm()
+        profile_form = ProfileForm()
 
     context = {
-        'form': form, 
+        'form': form,
         'profile_form': profile_form
     }
     return render(request, 'registro/register.html', context)

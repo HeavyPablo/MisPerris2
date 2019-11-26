@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import HttpResponseRedirect
 
-from .models import UserProfile
+from .models import Profile
 
 class Login(auth_views.LoginView):
     def form_valid(self, form):
@@ -57,9 +57,9 @@ class ExtendedUserCreationForm(UserCreationForm):
             user.save()
         return user
 
-class UserProfileForm(forms.ModelForm):
+class ProfileForm(forms.ModelForm):
     class Meta:
-        model = UserProfile
+        model = Profile
         fields = (
             'rut',
             'fechanacimiento',
