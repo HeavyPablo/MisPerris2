@@ -1,0 +1,15 @@
+{% extends 'registro/index.html' %}
+
+{% block content %}
+{% for post in posts %}
+<div class="post">
+    <div class="figure">
+        {{ pet.imagen }}
+    </div>
+    <h2>{{ post.nombre }}</h2>
+    <h2>{{ post.raza }}</h2>
+    <h2>{{ post.estado }}</h2>
+    <p>{{ pet.descripcion|linebreaksbr }}</p>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends 'registro/index.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="row content-section shadow mb-1 justify-content-center">
+    <form method="POST" enctype="multipart/form-data" action="{% url 'register_pet' %}" class="p-3 col-md-6 col-xs-12">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class='border-bottom mb-4'>Registrar Mascota</legend>
+            {{ form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Rescatar</button>
+        </div>
+    </form>
+    <div class="row border-top p-3 col-12 justify-content-center">
+        <small class="text-muted">
+            ¿Quieres ver el album de mascotas?
+        </small>
+    </div>
+</div>
+{% endblock %}

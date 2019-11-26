@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import HttpResponseRedirect
 
-from .models import Profile
+from .models import Profile, Rescatado
 
 class Login(auth_views.LoginView):
     def form_valid(self, form):
@@ -85,4 +85,31 @@ class ProfileForm(forms.ModelForm):
             'region': forms.Select(attrs={'class': 'custom-select'}),
             'ciudad': forms.Select(attrs={'class': 'custom-select'}),
             'tipovivienda': forms.Select(attrs={'class': 'custom-select'}),
+        }
+
+class RescatadoForm(forms.ModelForm):
+    class Meta:
+        model = Rescatado
+        fields = (
+            'imagen',
+            'nombre',
+            'raza',
+            'descripcion',
+            'estado',
+        )
+
+        labels = {
+            'imagen': 'Imagen',
+            'nombre': 'Nombre Mascota',
+            'raza': 'Raza Mascota',
+            'descripcion': 'Descripción',
+            'estado': 'Estado',
+        }
+
+        widgets = {
+            'image': forms.FileInput(attrs={'class': 'form-control-file'}),
+            'nombre': forms.TextInput(attrs={'class': 'form-control'}),
+            'raza': forms.TextInput(attrs={'class': 'form-control'}),
+            'descripcion': forms.Textarea(attrs={'class': 'form-control', 'rows': '3'}),
+            'estado': forms.Select(attrs={'class': 'custom-select'}),
         }

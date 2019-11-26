@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
-from .forms import ProfileForm, ExtendedUserCreationForm
+from .forms import ProfileForm, ExtendedUserCreationForm, RescatadoForm
+from .models import Rescatado
 
 # Create your views here.
 # def registro_mascota(request):
@@ -41,3 +43,34 @@ def register(request):
         'profile_form': profile_form
     }
     return render(request, 'registro/register.html', context)
+
+
+@login_required
+def rescatadoView(request):
+    if not request.user.is_authenticated:
+        return redirect('login')
+
+    if request.method == 'POST':
+        form = RescatadoForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.autor = request.user
+            form.save()
+            return redirect('home')
+
+    else:
+        form = RescatadoForm()
+
+    context = {
+        'form': form,
+    }
+    return render(request, 'registro/register_pet.html', context)
+
+def petListview(request):
+    pet = Rescatado.objects.filter().order_by('id')
+
+    context = {
+        'pet': pet,
+    }
+    return render(request, 'registro/listview_pet.html', context)
