@@ -2,8 +2,8 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<div class="content-section">
-    <form method="post">
+<div class="row content-section shadow mb-1 justify-content-center">
+    <form method="POST" class="p-3 col-md-6 col-xs-12">
         {% csrf_token %}
         <fieldset class='form-group'>
             <legend class="border-bottom mb-4">Login</legend>
@@ -13,7 +13,7 @@
             <button class="btn btn-outline-info" type="submit">Login</button>
         </div>
     </form>
-    <div class="border-top pt-3">
+    <div class="border-top p-3 row col-12 justify-content-center">
         <small class="text-muted">
             ¿No tienes una cuenta? <a class="ml-2" href="#">Registrarse</a>
             &nbsp;|&nbsp;

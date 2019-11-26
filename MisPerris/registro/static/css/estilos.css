@@ -1,4 +1,4 @@
-.nav-itema > a {
+.nav-itema > a, .nav-itema2 > a {
     color: white;
     font-weight: 500;
     text-decoration: none;
@@ -6,7 +6,7 @@
 
 a:hover {
     text-decoration: none;
-    color: #66adff;
+    color: #117a8b;
 }
 
 h4 {
@@ -224,4 +224,13 @@ footer {
 .galeria > div {
     padding-top: 15px;
     padding-bottom: 15px;
+}
+
+.fade-in {
+    opacity: 0;
+}
+
+.content-section {
+    padding-left: 16px;
+    padding-right: 16px;
 }

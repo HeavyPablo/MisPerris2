@@ -16,8 +16,6 @@ class Login(auth_views.LoginView):
 
 class ExtendedUserCreationForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    first_name = forms.CharField(max_length=30)
-    last_name = forms.CharField(max_length=150)
 
     class Meta:
         model = User
@@ -30,7 +28,7 @@ class ExtendedUserCreationForm(UserCreationForm):
             'password2',
         )
 
-        label = {
+        labels = {
             'username': 'Nombre de Usuario',
             'email': 'Email',
             'first_name': 'Nombre',
@@ -61,8 +59,15 @@ class ExtendedUserCreationForm(UserCreationForm):
 
 class UserProfileForm(forms.ModelForm):
     class Meta:
-        Model = UserProfile
-        fields = "__all__"
+        model = UserProfile
+        fields = (
+            'rut',
+            'fechanacimiento',
+            'telefono',
+            'region',
+            'ciudad',
+            'tipovivienda',
+        )
 
         labels = {
             'rut': 'Rut',

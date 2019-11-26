@@ -26,17 +26,19 @@
                 <div class="row content-log1 align-items-center justify-content-center" style="display: flex;">
                     {% if not user.is_authenticated %}
                     <span>
-                        <button type="button" class="btn btn-light"><a href="{% url 'login' %}">Ingresar</a></button>
+                        <a href="{% url 'login' %}"><button type="button" class="btn btn-light">Ingresar</button></a>
                     </span>
                     <span>
-                        <button type="button" class="btn btn-light"><a href="{% url 'register' %}">Registrate</a></button>
+                        <a href="{% url 'register' %}"><button type="button" class="btn btn-info">
+                                Registrate</button></a>
                     </span>
                     {% else %}
-                    <span>
+                    <span class="nav-itema2">
                         <a href="">{{ user.username }}</a>
                     </span>
                     <span>
-                        <button type="button" class="btn btn-dark"><a href="{% url 'logout' %}?next=/login">Salir</a></button>
+                        <a href="{% url 'logout' %}?next=/login"><button type="button"
+                                class="btn btn-info">Salir</button></a>
                     </span>
                     {% endif %}
                 </div>
@@ -56,18 +58,19 @@
             </li>
             <div class="row content-log2 justify-content-end col-3" style="display: flex;">
                 {% if not user.is_authenticated %}
-                <span class="nav-itema" >
-                    <button type="button" class="btn btn-light"><a href="{% url 'login' %}">Ingresar</a></button>
+                <span class="nav-itema">
+                    <a href="{% url 'login' %}"><button type="button" class="btn btn-light">Ingresar</button></a>
                 </span>
                 <span class="nav-itema">
-                    <button type="button" class="btn btn-light"><a href="{% url 'register' %}">Registrate</a></button>
+                    <a href="{% url 'register' %}"><button type="button" class="btn btn-info">Registrate</button></a>
                 </span>
                 {% else %}
                 <span class="nav-itema">
                     <a href="">{{ user.username }}</a>
                 </span>
                 <span class="nav-itema">
-                    <button type="button" class="btn btn-dark"><a href="{% url 'logout' %}?next=/login">Salir</a></button>
+                    <a href="{% url 'logout' %}?next=/login"><button type="button"
+                            class="btn btn-info">Salir</button></a>
                 </span>
                 {% endif %}
             </div>
@@ -78,13 +81,36 @@
     {% block content %}
     {% endblock %}
 
-    <footer class="d-flex align-items-center p-3">
+    <footer class="d-flex align-items-center p-3 text-muted">
         Analista Programador DuocUC
     </footer>
 
     <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $(window).scroll(function () {
+
+                $('.fade-in').each(function (i) {
+
+                    var bottom_of_object = $(this).offset().top + $(this).outerHeight();
+                    var bottom_of_window = $(window).scrollTop() + ($(window).height()*1.07);
+
+                    if (bottom_of_window > bottom_of_object) {
+
+                        $(this).animate({ 'opacity': '1' }, 500);
+
+                    }
+
+                });
+
+            });
+
+        });
+    </script>
 
 </body>
 

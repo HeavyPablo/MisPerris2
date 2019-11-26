@@ -3,21 +3,23 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form method="POST" action="{% url 'register' %}" class="p-3">
-    {% csrf_token %}
-    <fieldset class="form-group">
-        <legend class='border-bottom mb-4'>Registrarse</legend>
-        {{ form.as_p }}
-        {{ profile_form.as_p }}
-    </fieldset>
-    <div class="form-group">
-        <button class="btn btn-outline-info" type="submit">Registrarse</button>
+<div class="row content-section shadow mb-1 justify-content-center">
+    <form method="POST" action="{% url 'register' %}" class="p-3 col-md-6 col-xs-12">
+        {% csrf_token %}
+        <fieldset class="form-group">
+            <legend class='border-bottom mb-4'>Registrarse</legend>
+            {{ form|crispy }}
+            {{ profile_form|crispy }}
+        </fieldset>
+        <div class="form-group">
+            <button class="btn btn-outline-info" type="submit">Registrarse</button>
+        </div>
+    </form>
+    <div class="row border-top p-3 col-12 justify-content-center">
+        <small class="text-muted">
+            Ya tienes una cuenta?
+            <a class="ml-2" href="{% url 'login' %}">Iniciar sesion</a>
+        </small>
     </div>
-</form>
-<div class="border-top tp-3">
-    <small class="text-muted">
-        Ya tienes una cuenta?
-        <a class="ml-2" href="{% url 'login' %}">Iniciar sesion</a>
-    </small>
 </div>
 {% endblock %}

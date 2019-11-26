@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.models import User
 
 from .forms import UserProfileForm, ExtendedUserCreationForm
 
@@ -16,9 +17,10 @@ def home(request):
 def register(request):
     if request.method == 'POST':
         form = ExtendedUserCreationForm(request.POST)
-        profile_form = UserProfileForm(request.POST)
+        profile_form = UserProfileForm(request.POST or None)
 
         if profile_form.is_valid() and form.is_valid():
+        #if form.is_valid():
             user = form.save()
 
             profile = profile_form.save(commit=False)
@@ -36,5 +38,8 @@ def register(request):
         form = ExtendedUserCreationForm()
         profile_form = UserProfileForm()
 
-    context = {'form': form, 'profile_form': profile_form}
+    context = {
+        'form': form, 
+        'profile_form': profile_form
+    }
     return render(request, 'registro/register.html', context)
