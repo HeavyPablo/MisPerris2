@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+</head>
+
+<body>
+
+    <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar navegacion">
+
+        <ul class="nav">
+
+            <div class="content-iconlog justify-content-between">
+                <a class="navbar-brand col-lg-3 logo" href="{% url 'home' %}">
+                    <img src="{% static 'img/content/logo.png' %}" class="d-block w-100">
+                </a>
+                <div class="row content-log1 align-items-center justify-content-center" style="display: flex;">
+                    {% if not user.is_authenticated %}
+                    <span>
+                        <button type="button" class="btn btn-light"><a href="{% url 'login' %}">Ingresar</a></button>
+                    </span>
+                    <span>
+                        <button type="button" class="btn btn-light"><a href="{% url 'register' %}">Registrate</a></button>
+                    </span>
+                    {% else %}
+                    <span>
+                        <a href="">{{ user.username }}</a>
+                    </span>
+                    <span>
+                        <button type="button" class="btn btn-dark"><a href="{% url 'logout' %}?next=/login">Salir</a></button>
+                    </span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <li class="nav-itema col-lg-1">
+                <a href="{% url 'home' %}">Inicio</a>
+            </li>
+            <li class="nav-itema col-lg-2">
+                <a href="#">Quienes Somos</a>
+            </li>
+            <li class="nav-itema col-lg-1">
+                <a href="#">Servicios</a>
+            </li>
+            <li class="nav-itema col-lg-2">
+                <a href="#">Contáctanos</a>
+            </li>
+            <div class="row content-log2 justify-content-end col-3" style="display: flex;">
+                {% if not user.is_authenticated %}
+                <span class="nav-itema" >
+                    <button type="button" class="btn btn-light"><a href="{% url 'login' %}">Ingresar</a></button>
+                </span>
+                <span class="nav-itema">
+                    <button type="button" class="btn btn-light"><a href="{% url 'register' %}">Registrate</a></button>
+                </span>
+                {% else %}
+                <span class="nav-itema">
+                    <a href="">{{ user.username }}</a>
+                </span>
+                <span class="nav-itema">
+                    <button type="button" class="btn btn-dark"><a href="{% url 'logout' %}?next=/login">Salir</a></button>
+                </span>
+                {% endif %}
+            </div>
+        </ul>
+
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+    <footer class="d-flex align-items-center p-3">
+        Analista Programador DuocUC
+    </footer>
+
+    <script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+
+</body>
+
+</html>
