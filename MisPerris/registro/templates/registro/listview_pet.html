@@ -1,15 +1,20 @@
 {% extends 'registro/index.html' %}
+{% load static %}
 
 {% block content %}
-{% for post in posts %}
-<div class="post">
-    <div class="figure">
-        {{ pet.imagen }}
+<div class="row content-section shadow mb-1 justify-content-center p-3">
+    <fieldset class="form-group col-12">
+        <legend class='border-bottom mb-4'>Album de Mascotas</legend>
+    </fieldset>
+    {% for pets in pet %}
+    <div class="border rounded content-pet">
+            <img class="image-pet" src="{{ pets.imagen.url }}" alt="{{ pets.nombre }}">
+        <h2>{{ pets.nombre }}</h2>
+        <h2>{{ pets.raza }}</h2>
+        <h2>{{ pets.estado }}</h2>
+        <p>{{ pets.descripcion|linebreaksbr }}</p>
     </div>
-    <h2>{{ post.nombre }}</h2>
-    <h2>{{ post.raza }}</h2>
-    <h2>{{ post.estado }}</h2>
-    <p>{{ pet.descripcion|linebreaksbr }}</p>
+    {% endfor %}
 </div>
-{% endfor %}
+
 {% endblock %}
