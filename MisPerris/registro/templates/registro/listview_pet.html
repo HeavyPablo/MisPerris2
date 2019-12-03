@@ -8,7 +8,7 @@
     </fieldset>
     {% for pets in pet %}
     <div class="border rounded content-pet">
-            <img class="image-pet" src="{{ pets.imagen.url }}" alt="{{ pets.nombre }}">
+            <img class="image-pet border-bottom" src="{{ pets.imagen.url }}" alt="{{ pets.nombre }}">
         <h2>{{ pets.nombre }}</h2>
         <h2>{{ pets.raza }}</h2>
         <h2>{{ pets.estado }}</h2>
