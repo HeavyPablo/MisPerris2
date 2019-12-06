@@ -2,19 +2,69 @@
 {% load static %}
 
 {% block content %}
-<div class="row content-section shadow mb-1 justify-content-center p-3">
+<div class="content-section shadow mb-1 justify-content-center p-3">
     <fieldset class="form-group col-12">
         <legend class='border-bottom mb-4'>Album de Mascotas</legend>
     </fieldset>
-    {% for pets in pet %}
-    <div class="border rounded content-pet">
-            <img class="image-pet border-bottom" src="{{ pets.imagen.url }}" alt="{{ pets.nombre }}">
-        <h2>{{ pets.nombre }}</h2>
-        <h2>{{ pets.raza }}</h2>
-        <h2>{{ pets.estado }}</h2>
-        <p>{{ pets.descripcion|linebreaksbr }}</p>
+    <div class="d-flex justify-content-around">
+        <div class="album-colection d-inline-flex">
+            {% for pet in pets %}
+            <div class="col-12 col-md-4 col-lg-3 border rounded content-pet">
+                <div class="border-bottom d-flex justify-content-center">
+                    <div class="image-pet-content d-flex align-items-center justify-content-center">
+                        <img class="image-pet d-block w-100" src="{{ pet.imagen.url }}" alt="{{ pet.nombre }}">
+                    </div>
+                </div>
+                <h3>Nombre: {{ pet.nombre }}</h3>
+                <h4>Raza: {{ pet.raza }}</h4>
+                <h4>Estado: {{ pet.estado }}</h4>
+                <p>Descripció: {{ pet.descripcion|linebreaksbr }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
-    {% endfor %}
+
+    {% if pets.has_other_pages %}
+    <div class="row col-12 justify-content-center">
+        <ul class="pagination">
+
+            {% if pets.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ pets.previous_page_number }}">Anterior</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link">Anterior</a>
+            </li>
+            {% endif %}
+
+            {% for pet in pets.paginator.page_range %}
+            {% if pets.number == pet %}
+            <li class="page-item active"><a class="page-link" href="">{{ pet }} <span
+                        class="sr-only">(current)</span></a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="?page={{ pet }}">{{ pet }}</a></li>
+            {% endif %}
+            {% endfor %}
+
+            {% if pets.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ pets.next_page_number }}">Siguiente</a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link" href="">Siguiente</a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    {% else %}
+    <div class="col-12 d-flex border-top p-3 col-12 justify-content-center">
+        <small class="text-muted">
+            Esas son todas mascotas.
+        </small>
+    </div>
+    {% endif %}
 </div>
 
 {% endblock %}

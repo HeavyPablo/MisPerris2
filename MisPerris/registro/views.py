@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .forms import ProfileForm, ExtendedUserCreationForm, RescatadoForm
 from .models import Rescatado
@@ -68,9 +69,20 @@ def rescatadoView(request):
     return render(request, 'registro/register_pet.html', context)
 
 def petListview(request):
-    pet = Rescatado.objects.filter().order_by('id')
+    pets = Rescatado.objects.filter().order_by('id')
+
+    paginator = Paginator(pets, 3)
+
+    page = request.GET.get('page', 1)
+
+    try:
+        pets = paginator.page(page)
+    except PageNotAnInteger:
+        pets = paginator.page(1)
+    except EmptyPage:
+        pets = paginator.page(paginator.num_pages)
 
     context = {
-        'pet': pet,
+        'pets': pets,
     }
     return render(request, 'registro/listview_pet.html', context)
