@@ -33,10 +33,14 @@
                                 Registrate</button></a>
                     </span>
                     {% else %}
-                    <span class="nav-itema2">
+                    <span class="nav-itema2 p-1">
                         <a href="">{{ user.username }}</a>
                     </span>
-                    <span>
+                    <span class="p-1">
+                        <a href="{% url 'register_pet' %}?next=/login"><button type="button"
+                                class="btn btn-info">Rescatar</button></a>
+                    </span>
+                    <span class="p-1">
                         <a href="{% url 'logout' %}?next=/login"><button type="button"
                                 class="btn btn-info">Salir</button></a>
                     </span>
@@ -68,6 +72,10 @@
                 <span class="nav-itema">
                     <a href="">{{ user.username }}</a>
                 </span>
+                <span class=" nav-itema">
+                    <a href="{% url 'register_pet' %}?next=/login"><button type="button"
+                            class="btn btn-info">Rescatar</button></a>
+                </span>
                 <span class="nav-itema">
                     <a href="{% url 'logout' %}?next=/login"><button type="button"
                             class="btn btn-info">Salir</button></a>
@@ -97,10 +105,10 @@
                 $('.fade-in').each(function (i) {
 
                     var bottom_of_object = $(this).offset().top + $(this).outerHeight();
-                    var bottom_of_window = $(window).scrollTop() + ($(window).height()*1.2);
+                    var bottom_of_window = $(window).scrollTop() + ($(window).height() * 1.2);
 
                     if (bottom_of_window > bottom_of_object) {
-                        $(this).animate({ 'opacity': '1'}, 500);
+                        $(this).animate({ 'opacity': '1' }, 500);
                     }
                 });
             });

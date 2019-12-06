@@ -87,7 +87,7 @@ footer {
 }
 
 .content-log2>.nav-itema {
-    margin-right: 10px;
+    margin-right: 8px;
 }
 
 .content-log1 {
@@ -193,6 +193,7 @@ footer {
 }
 
 .info {
+    margin: 0% !important;
     background: #6dccaa;
     height: 70px;
 }
@@ -221,6 +222,7 @@ footer {
 }
 
 .contenido {
+    margin: 0% !important;
     padding-top: 25px;
 }
 
@@ -253,6 +255,7 @@ footer {
 }
 
 .content-section {
+    margin: 0% !important;
     padding-left: 16px;
     padding-right: 16px;
 }
